@@ -22,14 +22,39 @@ class App extends Component {
       { id: 46, name: 'Intelligent Leather Clock', priceInCents: 2999 },
       { id: 47, name: 'Ergonomic Bronze Lamp', priceInCents: 40000 },
       { id: 48, name: 'Awesome Leather Shoes', priceInCents: 3990 },
-    ]
+    ],
+    form: {
+      productSelected: "", 
+      quantitySelected: ""
+    }
+  }
+  _changeProductSelected = (productName) => {
+    console.log(productName)
+    this.setState(prevState => {
+        return {
+          form: {
+          ...prevState.form,
+          productSelected: productName
+          }
+        }
+    })
+  }
+  _changeQuantity = (quant) => {
+    this.setState(prevState => {
+      return {
+        form: {
+          ...prevState.form,
+          quantitySelected: quant
+        }
+      }
+    })
   }
   render() {
     return (
       <>
         <CartHeader />
         <CartItem cartItemList={this.state.cartItemList}/>
-        <AddItem products={this.state.products} />
+        <AddItem products={this.state.products} _changeQuantity={this._changeQuantity} forms={this.state.form} _changeProductSelected={this._changeProductSelected}/>
         <CartFooter year={2018} />
       </>
     )
