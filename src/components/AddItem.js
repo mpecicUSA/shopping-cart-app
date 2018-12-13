@@ -2,27 +2,31 @@ import React, { Component } from "react"
 import { Button, Form, FormGroup, Input} from "reactstrap"
 
 class AddItem extends Component {
-    products = this.props.products
     _onDecision = (e) => {
-        console.log(e.target.value);
-        // this.props._changeProductSelected(e.target.value)
+        this.props.changeProductSelected(e.target.value)
     }
     _updateQuantity = (e) => {
-        this.props._changeQuantity(e.target.value)
+        this.props.changeQuantity(e.target.value)
     } 
-    
-    productsOption = this.products.map(item => <option onChange={this._onDecision} value={item.name} key={item.id}>{item.name}</option>)
+    _submitFunction = (e) => {
+        e.preventDefault()
+        this.props.updateCart(this.props.forms)
+
+    }
     render(){
+        const products = this.props.products
+        const productsOption = products.map(item => <option value={item.name} key={item.id}>{item.name}</option>)
+
         return(
             <div className="container">
-                <Form>
+                <Form onSubmit={this._submitFunction}>
                     <FormGroup>
                         <Input type="text" placeholder="Quantity" onChange={this._updateQuantity} value={this.props.forms.quantitySelected} />
                     </FormGroup>
                     <FormGroup>
-                        <select>
+                        <select onChange={this._onDecision}>
                             <option>Choose a item</option>
-                            {this.productsOption}
+                            {productsOption}
                         </select>
                     </FormGroup>
                     <FormGroup>

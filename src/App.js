@@ -29,7 +29,6 @@ class App extends Component {
     }
   }
   _changeProductSelected = (productName) => {
-    console.log(productName)
     this.setState(prevState => {
         return {
           form: {
@@ -49,12 +48,24 @@ class App extends Component {
       }
     })
   }
+  _updateShoppingCart = (someParams) => {
+    console.log(someParams)
+    this.setState(prevState => {
+      return {
+        cartItemList: [
+          ...prevState.cartItemList,
+          someParams
+        ]
+      }
+    })
+  }
   render() {
+    console.log(this._updateShoppingCart)
     return (
       <>
         <CartHeader />
         <CartItem cartItemList={this.state.cartItemList}/>
-        <AddItem products={this.state.products} _changeQuantity={this._changeQuantity} forms={this.state.form} _changeProductSelected={this._changeProductSelected}/>
+        <AddItem updateCart={this._updateShoppingCart} products={this.state.products} changeQuantity={this._changeQuantity} forms={this.state.form} changeProductSelected={this._changeProductSelected}/>
         <CartFooter year={2018} />
       </>
     )
