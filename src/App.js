@@ -49,25 +49,31 @@ class App extends Component {
     })
   }
   _updateShoppingCart = (someParams) => {
-    console.log(
-      "These are the someParams in _update shopping cart function",someParams)
+    console.log(someParams)
     let productDetail = this.state.products.filter(product => product.id == someParams.productSelected)[0]
-    console.log("Results of filter", productDetail)
+    // let arrayOfIds = this.state.cartItemList.map(item => item.id)
+    // console.log("This is productdetail.id", productDetail.id);
     productDetail = {id: productDetail.id,name: productDetail.name, priceInCents:productDetail.priceInCents, quantity: someParams.quantitySelected}
-    console.log(productDetail);
-
-    this.setState(prevState => {
-      return {
-        cartItemList: [
-          ...prevState.cartItemList,
-          productDetail
-        ]
-      }
-    })
-    console.log(this.state.cartItemList)
+    // this.setState(prevState => {
+    //   return {
+    //     cartItemList: [
+    //       ...prevState.cartItemList,
+    //       productDetail
+    //     ]
+    //   }
+    // })
+console.log(someParams.productSelected)
+console.log(someParams.quantitySelected)
+      this.setState(( {cartItemList} ) => ({
+        cartItemList: cartItemList.filter(item => item.id === productDetail.id)[0] ? cartItemList.map(item =>{
+          if(item.id === productDetail.id){
+            item.quantity += +someParams.quantitySelected
+          }
+          return item;
+        }) : [...cartItemList, productDetail]
+      }))
   }
   render() {
-    console.log(this._updateShoppingCart)
     return (
       <>
         <CartHeader />
