@@ -8,9 +8,9 @@ import './App.css';
 class App extends Component {
   state = {
     cartItemList: [
-    { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 }, quantity: 1 },
-    { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
-    { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 },
+    { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 , quantity: 1 },
+    { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 , quantity: 2 },
+    { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999, quantity: 1 },
     ],
     products: [
       { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
@@ -49,15 +49,22 @@ class App extends Component {
     })
   }
   _updateShoppingCart = (someParams) => {
-    console.log(someParams)
+    console.log(
+      "These are the someParams in _update shopping cart function",someParams)
+    let productDetail = this.state.products.filter(product => product.id == someParams.productSelected)[0]
+    console.log("Results of filter", productDetail)
+    productDetail = {id: productDetail.id,name: productDetail.name, priceInCents:productDetail.priceInCents, quantity: someParams.quantitySelected}
+    console.log(productDetail);
+
     this.setState(prevState => {
       return {
         cartItemList: [
           ...prevState.cartItemList,
-          someParams
+          productDetail
         ]
       }
     })
+    console.log(this.state.cartItemList)
   }
   render() {
     console.log(this._updateShoppingCart)

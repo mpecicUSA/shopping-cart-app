@@ -15,8 +15,7 @@ class AddItem extends Component {
     }
     render(){
         const products = this.props.products
-        const productsOption = products.map(item => <option value={item.name} key={item.id}>{item.name}</option>)
-
+        const productsOption = products.map(item => <option value={item.id} key={item.id}>{item.name}</option>)
         return(
             <div className="container">
                 <Form onSubmit={this._submitFunction}>

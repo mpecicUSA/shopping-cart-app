@@ -5,8 +5,7 @@ import { ListGroup, ListGroupItem } from "reactstrap"
 class CartItems extends Component {
     render(){
         // console.log(this.props.cartItems)
-        let {quantity} = this.props.cartItems
-        let { name, priceInCents} = this.props.cartItems.product
+        let { quantity, name, priceInCents} = this.props.cartItems
 
         return(
             <ListGroup>
